@@ -1,0 +1,173 @@
+import { BlogLayout } from "@/components/BlogLayout";
+
+import { CodeWindow } from "@/components/CodeWindow";
+
+export const meta = {
+  date: "2023-08-18",
+  title: "Menulis code dengan rapih menggunakan react",
+  description: "Cara yang efektif dan efisien untuk menulis kode yang bersih dengan React sambil tetap memperhatikan kinerja dan pemeliharaan basis kode.",
+  image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  tags: ["Clean Code"],
+};
+
+export default (props) => <BlogLayout meta={meta} {...props} />;
+
+## Cara yang Efektif dan Efisien untuk Menulis Kode yang Bersih dengan React
+
+Menulis kode yang rapi dan terstruktur sangat penting dalam pengembangan aplikasi berbasis React. Kode yang bersih tidak hanya meningkatkan keterbacaan tetapi juga memudahkan pemeliharaan dan skalabilitas proyek. Berikut beberapa tips dan trik untuk menulis kode React dengan lebih baik.
+
+### 1. Struktur Folder yang Jelas
+
+Memiliki struktur proyek yang rapi membantu tim dalam memahami dan mengelola kode dengan lebih baik. Berikut contoh struktur yang direkomendasikan:
+
+```
+/src
+  ├── components  // Komponen reusable
+  ├── pages       // Halaman utama aplikasi
+  ├── hooks       // Custom hooks
+  ├── contexts    // Context API
+  ├── utils       // Fungsi bantuan
+  ├── assets      // Gambar dan style
+  ├── services    // API calls atau logic eksternal
+```
+
+Dengan struktur yang baik, Anda dapat dengan mudah menemukan dan mengelola kode tanpa kesulitan.
+
+### 2. Gunakan Functional Components dan Hooks
+
+Saat ini, penggunaan functional components dengan React Hooks lebih direkomendasikan dibanding class components. Misalnya:
+
+```javascript
+// Functional Component dengan Hooks
+import { useState } from "react";
+
+const Counter = () => {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Nilai: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Tambah</button>
+    </div>
+  );
+};
+
+export default Counter;
+```
+
+Ini lebih ringkas, lebih mudah dibaca, dan menghindari kompleksitas yang tidak perlu dibandingkan class components.
+
+### 3. Gunakan Destructuring Props
+
+Agar kode lebih bersih, gunakan destructuring untuk mengambil properti dari `props`:
+
+```javascript
+const Greeting = ({ name }) => {
+  return <h1>Halo, {name}!</h1>;
+};
+```
+
+Dibandingkan dengan:
+
+```javascript
+const Greeting = (props) => {
+  return <h1>Halo, {props.name}!</h1>;
+};
+```
+
+Dengan destructuring, kode menjadi lebih singkat dan lebih mudah dipahami.
+
+### 4. Gunakan State Management dengan Baik
+
+Jika aplikasi Anda mulai kompleks, pertimbangkan menggunakan state management seperti Context API atau Redux untuk menghindari prop drilling yang berlebihan.
+
+```javascript
+import { createContext, useContext, useState } from "react";
+
+const ThemeContext = createContext();
+
+export const ThemeProvider = ({ children }) => {
+  const [theme, setTheme] = useState("light");
+
+  return <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>;
+};
+
+export const useTheme = () => useContext(ThemeContext);
+```
+
+Dengan pendekatan ini, state dapat diakses di berbagai komponen tanpa harus mengoper props secara langsung.
+
+### 5. Gunakan ESLint dan Prettier
+
+Gunakan ESLint untuk memastikan kode sesuai dengan standar best practices dan Prettier untuk menjaga konsistensi format kode.
+
+Tambahkan konfigurasi berikut di `package.json`:
+
+```json
+{
+  "eslintConfig": {
+    "extends": ["react-app", "react-app/jest"]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "semi": false
+  }
+}
+```
+
+Kemudian jalankan:
+
+```sh
+npx eslint . --fix
+npx prettier --write .
+```
+
+### 6. Gunakan Lazy Loading dan Code Splitting
+
+Agar aplikasi lebih cepat dimuat, gunakan fitur lazy loading dengan `React.lazy` dan `Suspense`.
+
+```javascript
+import React, { lazy, Suspense } from "react";
+
+const Dashboard = lazy(() => import("./Dashboard"));
+
+const App = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <Dashboard />
+  </Suspense>
+);
+
+export default App;
+```
+
+### 7. Hindari Inline Styles dan Gunakan CSS Module atau TailwindCSS
+
+Penggunaan inline styles tidak direkomendasikan karena sulit untuk dikelola. Sebagai gantinya, gunakan CSS Module atau TailwindCSS.
+
+#### CSS Module
+
+```css
+/* Button.module.css */
+.button {
+  background-color: blue;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+```
+
+```javascript
+import styles from "./Button.module.css";
+
+const Button = () => <button className={styles.button}>Klik Saya</button>;
+```
+
+#### TailwindCSS
+
+```javascript
+const Button = () => <button className="bg-blue-500 text-white px-4 py-2 rounded">Klik Saya</button>;
+```
+
+### Kesimpulan
+
+Dengan mengikuti tips di atas, Anda dapat menulis kode React yang lebih bersih, mudah dikelola, dan efisien. Struktur proyek yang rapi, penggunaan functional components, state management yang baik, serta optimalisasi performa adalah kunci utama dalam menjaga kualitas kode React Anda.
