@@ -9,7 +9,7 @@ export const Contact = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     // Format pesan WhatsApp dengan input user
-    const encodedMessage = encodeURIComponent(`Haloo, saya *${name}*, Saya ingin menghubungi Anda melalui email: *${email}*.\n\nPesan saya: _*${message}*_.`);
+    const encodedMessage = encodeURIComponent(`Haloo, saya *${name}*, Saya ingin menghubungi Anda melalui email: *${email}*.\n\nPesan saya: *${message}*.`);
 
     // URL WhatsApp dengan teks yang telah di-encode
     const url = `https://api.whatsapp.com/send?phone=6281266988303&text=${encodedMessage}`;
