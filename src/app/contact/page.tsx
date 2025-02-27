@@ -17,7 +17,7 @@ export default function Projects() {
     <Container>
       <span className="text-4xl">✉️</span>
       <Heading className="font-black mb-2">Contact Me</Heading>
-      <p className="text-xs text-blue-400 hover:cursor-pointer hover:underline hover:text-blue-700 font-bold">Fitur ini sedang dalam pengembangan, Silakan hubungi saya melalui media sosial yang tertera terlebih dahulu.</p>
+      {/* <p className="text-xs text-blue-400 hover:cursor-pointer hover:underline hover:text-blue-700 font-bold">Fitur ini sedang dalam pengembangan, Silakan hubungi saya melalui media sosial yang tertera terlebih dahulu.</p> */}
       <Paragraph className="mb-10 max-w-xl">Hubungi saya melalui email atau isi formulir kontak ini. Saya akan segera menghubungi Anda.</Paragraph>
       <Contact />
     </Container>
